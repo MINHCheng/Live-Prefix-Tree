@@ -18,7 +18,7 @@ Trie::~Trie()
 
 int Trie::charToInt(char charnumber)
 {
-    return (charnumber - 'a');
+    return (charnumber - 'A');
 }
 
 ///////////////////// i function O(n) /////////////////////////////////////////
@@ -35,6 +35,10 @@ string Trie::insert(string &word)
 
 void Trie::inserthelper(string &word, int &stringCoutner, Trie::Node *&traverse, bool &pastexist)
 {
+    if (traverse == nullptr)
+    {
+        return;
+    }
     if (word.length() == stringCoutner)
     {
         if (!traverse->end)
@@ -181,7 +185,7 @@ void Trie::printhelper(Node *&current, string &prefix)
     {
         if (current->letters[i] != nullptr)
         {
-            char letter = static_cast<char>('a' + i);
+            char letter = static_cast<char>('A' + i);
             prefix.push_back(letter);
             printhelper(current->letters[i], prefix);
             prefix.pop_back();
@@ -202,7 +206,6 @@ void Trie::spellcheck(string &word) ////O(N)
         else
         {
             int char2number = charToInt(word[wordCounter]);
-            Node *bob = current->letters[char2number];
             if (current->letters[char2number] == nullptr)
             {
                 break;
@@ -227,12 +230,13 @@ void Trie::spellcheck(string &word) ////O(N)
     {
         string prefix;
         printhelper(current, partialString);
+        cout << endl;
     }
 }
 void Trie::empty()
 {
     Node *current = root;
-    for (int i; i < 26; i++)
+    for (int i = 0; i < 26; i++)
     {
         if (current->letters[i] != nullptr)
         {
@@ -265,7 +269,12 @@ void Trie::clearHelp(Node *&current)
     }
     return;
 }
-Trie::Node::Node() {}
+Trie::Node::Node() {
+    for (int i = 0; i < 26; i++)
+    {
+        this->letters[i] = nullptr;
+    }
+}
 Trie::Node::~Node()
 {
     for (int i = 0; i < 26; ++i)

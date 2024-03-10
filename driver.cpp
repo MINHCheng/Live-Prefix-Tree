@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include "trie.h"
-
+#include <fstream>
 int main()
 {
 
@@ -13,6 +13,15 @@ int main()
         string command;
         cin >> command;
 
+        if(command == "load"){
+            ifstream fin("corpus.txt");
+            string w;
+            while(!fin.eof()){
+                fin >> w;
+                tree.insert(w);
+            }
+            cout << "sucess" << endl;
+        }
         if (command == "i")
         {
             string word;
@@ -27,7 +36,7 @@ int main()
             if (num == 0)
                 cout << "not found" << endl;
             else
-                cout << "count is " << num << endl;;
+                cout << "number of words is " << num << endl;;
         }
         if(command == "e"){
             string word;
@@ -49,7 +58,7 @@ int main()
             tree.clear();
         }
         if(command == "size"){
-            cout << tree.num << endl;
+            cout << "count is "<<tree.num << endl;
         }
         if(command == "exit"){
             return 1;
