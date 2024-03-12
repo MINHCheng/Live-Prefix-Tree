@@ -156,7 +156,7 @@ void Trie::eraseHelper(Node *&current, string &word, int wordcounter, bool &chec
                 break;
             }
         }
-        if (shouldErase)
+        if (shouldErase && &current != &root)
         {
             /// delete node here
             delete current;
