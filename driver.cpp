@@ -20,7 +20,7 @@ int main()
                 fin >> w;
                 tree.insert(w);
             }
-            cout << "sucess" << endl;
+            cout << "success" << endl;
         }
         if (command == "i")
         {
@@ -36,7 +36,7 @@ int main()
             if (num == 0)
                 cout << "not found" << endl;
             else
-                cout << "number of words is " << num << endl;;
+                cout << "count is " << num << endl;;
         }
         if(command == "e"){
             string word;
@@ -58,7 +58,7 @@ int main()
             tree.clear();
         }
         if(command == "size"){
-            cout << "count is "<<tree.num << endl;
+            cout << "number of words is "<<tree.num << endl;
         }
         if(command == "exit"){
             return 1;

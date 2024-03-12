@@ -4,10 +4,6 @@
 Trie::Trie()
 {
     this->root = new Node;
-    for (int i = 0; i < 26; i++)
-    {
-        this->root->letters[i] = nullptr;
-    }
 }
 Trie::~Trie()
 {
@@ -129,8 +125,15 @@ void Trie::eraseHelper(Node *&current, string &word, int wordcounter, bool &chec
     {
         return;
     }
-    if (wordcounter == word.length()) // check if it has reached the end and switch to not end
-        current->end = false;
+    if (wordcounter == word.length())
+    {
+        if (current->end)
+        {
+            current->end = false;
+            this->num--;
+        } // check if it has reached the end and switch to not end
+        else check = false;
+    }
     else
     {
         int charValue = charToInt(word[wordcounter]);
@@ -269,7 +272,8 @@ void Trie::clearHelp(Node *&current)
     }
     return;
 }
-Trie::Node::Node() {
+Trie::Node::Node()
+{
     for (int i = 0; i < 26; i++)
     {
         this->letters[i] = nullptr;
